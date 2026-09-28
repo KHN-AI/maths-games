@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>乘法大挑戰</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--pastel-pink: #FFB5BA;
+--pastel-blue: #A8D8EA;
+--pastel-yellow: #FFFACD;
+--pastel-green: #B5EAD7;
+--pastel-purple: #E2B6CF;
+--pastel-orange: #FFCBA4;
+--pastel-cream: #FFF5E6;
+--soft-shadow: 0 8px 32px rgba(255, 181, 186, 0.3);
+--text-dark: #5D4E6D;
+--text-light: #8B7B9B;
+--error-red: #FF6B6B;
+--success-green: #6BCB77;
+}
+.dark {
+--pastel-pink: #C4848A;
+--pastel-blue: #6A9FB5;
+--pastel-yellow: #D4C98A;
+--pastel-green: #7AB89E;
+--pastel-purple: #A87D94;
+--pastel-orange: #CC9A7A;
+--pastel-cream: #3D3A4A;
+--soft-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+--text-dark: #E8E0F0;
+--text-light: #B8A8C8;
+--error-red: #FF8585;
+--success-green: #7ED889;
+}
+o	{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+-webkit-tap-highlight-color: transparent;
+}
+body {
+font-family: 'Nunito', sans-serif;
+background: linear-gradient(135deg, var(--pastel-cream) 0%, var(--pastel-pink) 50%, var(--pastel-blue) 100%);
+min-height: 100vh;
+color: var(--text-dark);
+overflow-x: hidden;
+}
+.container {
+max-width: 500px;
+margin: 0 auto;
+padding: 20px;
+min-height: 100vh;
+}
+/* Header /
+.header {
+text-align: center;
+padding: 20px 0;
+position: relative;
+}
+.title {
+font-size: 2.2rem;
+font-weight: 800;
+background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+margin-bottom: 10px;
+}
+.subtitle {
+font-size: 1rem;
+color: var(--text-light);
+font-weight: 600;
+}
+/* Decorative Vehicles /
+.vehicle {
+position: absolute;
+font-size: 2rem;
+animation: float 3s ease-in-out infinite;
+}
+.vehicle-1 { top: 10px; left: 10px; animation-delay: 0s; }
+.vehicle-2 { top: 10px; right: 10px; animation-delay: 0.5s; }
+.vehicle-3 { bottom: 10px; left: 30px; animation-delay: 1s; }
+.vehicle-4 { bottom: 10px; right: 30px; animation-delay: 1.5s; }
+@keyframes float {
+0%, 100% { transform: translateY(0) rotate(-5deg); }
+50% { transform: translateY(-10px) rotate(5deg); }
+}
+/* Level Selection /
+.level-grid {
+display: flex;
+flex-direction: column;
+gap: 20px;
+margin-top: 20px;
+}
+.level-card {
+background: rgba(255, 255, 255, 0.9);
+border-radius: 24px;
+padding: 20px;
+box-shadow: var(--soft-shadow);
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+.dark .level-card {
+background: rgba(60, 55, 75, 0.9);
+}
+.level-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 40px rgba(255, 181, 186, 0.4);
+}
+.level-card.beginner { border-left: 6px solid var(--pastel-green); }
+.level-card.intermediate { border-left: 6px solid var(--pastel-orange); }
+.level-card.advanced { border-left: 6px solid var(--pastel-purple); }
+.level-header {
+display: flex;
+align-items: center;
+gap: 15px;
+margin-bottom: 15px;
+}
+.level-icon {
+font-size: 2.5rem;
+}
+.level-title {
+font-size: 1.5rem;
+font-weight: 700;
+}
+.level-desc {
+font-size: 0.9rem;
+color: var(--text-light);
+margin-bottom: 15px;
+}
+/* Stage indicators /
+.stages-row {
+display: flex;
+gap: 10px;
+justify-content: center;
+}
+.stage-dot {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 1rem;
+background: #E8E8E8;
+color: #999;
+transition: all 0.3s ease;
+}
+.dark .stage-dot {
+background: #4A4560;
+color: #888;
+}
+.stage-dot.unlocked {
+background: var(--pastel-green);
+color: white;
+cursor: pointer;
+}
+.stage-dot.locked {
+position: relative;
+}
+.stage-dot.locked::after {
+content: '🔒';
+font-size: 0.8rem;
+position: absolute;
+bottom: -2px;
+right: -2px;
+}
+.stage-dot.completed {
+background: var(--success-green);
+color: white;
+}
+.stage-dot.completed::after {
+content: '✓';
+font-size: 0.7rem;
+position: absolute;
+bottom: -2px;
+right: -2px;
+background: white;
+border-radius: 50%;
+width: 16px;
+height: 16px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--success-green);
+}
+/* Game Screen /
+.game-screen {
+display: none;
+flex-direction: column;
+min-height: 100vh;
+padding-bottom: 20px;
+}
+.game-screen.active {
+display: flex;
+}
+.game-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 0;
+}
+.back-btn {
+background: rgba(255, 255, 255, 0.8);
+border: none;
+border-radius: 50%;
+width: 44px;
+height: 44px;
+font-size: 1.5rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: var(--soft-shadow);
+}
+.dark .back-btn {
+background: rgba(60, 55, 75, 0.8);
+}
+.progress-info {
+text-align: center;
+}
+.progress-text {
+font-size: 1.1rem;
+font-weight: 700;
+color: var(--text-dark);
+}
+.stage-label {
+font-size: 0.85rem;
+color: var(--text-light);
+}
+.timer-display {
+background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-orange));
+border-radius: 20px;
+padding: 8px 16px;
+font-size: 1.2rem;
+font-weight: 700;
+color: white;
+display: flex;
+align-items: center;
+gap: 6px;
+box-shadow: var(--soft-shadow);
+}
+.timer-display.warning {
+animation: pulse 0.5s ease-in-out infinite;
+background: linear-gradient(135deg, var(--error-red), #FF8585);
+}
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+/* Question Display /
+.question-area {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 20px 0;
+}
+.question-card {
+background: rgba(255, 255, 255, 0.95);
+border-radius: 30px;
+padding: 30px 40px;
+text-align: center;
+box-shadow: var(--soft-shadow);
+min-width: 280px;
+position: relative;
+}
+.dark .question-card {
+background: rgba(60, 55, 75, 0.95);
+}
+.question-number {
+position: absolute;
+top: -15px;
+left: 50%;
+transform: translateX(-50%);
+background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+color: white;
+padding: 5px 20px;
+border-radius: 20px;
+font-weight: 700;
+font-size: 0.9rem;
+}
+.question-text {
+font-size: 2.5rem;
+font-weight: 800;
+color: var(--text-dark);
+margin: 20px 0;
+}
+.answer-display {
+font-size: 2.5rem;
+font-weight: 800;
+color: var(--pastel-purple);
+min-height: 50px;
+border-bottom: 4px solid var(--pastel-purple);
+margin: 10px 0;
+padding: 5px 20px;
+}
+.answer-display.empty::after {
+content: '?';
+color: #CCC;
+}
+/* Calculator Keypad /
+.keypad {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+padding: 20px;
+background: rgba(255, 255, 255, 0.9);
+border-radius: 30px;
+box-shadow: var(--soft-shadow);
+margin-top: auto;
+}
+.dark .keypad {
+background: rgba(60, 55, 75, 0.9);
+}
+.key {
+height: 60px;
+border: none;
+border-radius: 16px;
+font-size: 1.8rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.15s ease;
+font-family: 'Nunito', sans-serif;
+}
+.key-number {
+background: linear-gradient(135deg, var(--pastel-cream), #FFF);
+color: var(--text-dark);
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.dark .key-number {
+background: linear-gradient(135deg, #4A4560, #5A5575);
+color: var(--text-dark);
+}
+.key-number:active {
+transform: scale(0.95);
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.key-clear {
+background: linear-gradient(135deg, var(--pastel-orange), var(--pastel-pink));
+color: white;
+}
+.key-submit {
+background: linear-gradient(135deg, var(--pastel-green), var(--pastel-blue));
+color: white;
+grid-column: span 2;
+}
+.key-delete {
+background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink));
+color: white;
+}
+/* Countdown Overlay /
+.countdown-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.countdown-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+.countdown-number {
+font-size: 8rem;
+font-weight: 800;
+color: white;
+text-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+animation: countdownPop 0.8s ease-out;
+}
+@keyframes countdownPop {
+0% { transform: scale(0); opacity: 0; }
+50% { transform: scale(1.3); }
+100% { transform: scale(1); opacity: 1; }
+}
+/* Results Screen /
+.results-screen {
+display: none;
+flex-direction: column;
+min-height: 100vh;
+padding: 20px;
+}
+.results-screen.active {
+display: flex;
+}
+.results-header {
+text-align: center;
+padding: 20px 0;
+}
+.results-icon {
+font-size: 5rem;
+margin-bottom: 15px;
+}
+.results-score {
+font-size: 2.5rem;
+font-weight: 800;
+color: var(--text-dark);
+}
+.results-message {
+font-size: 1.2rem;
+color: var(--text-light);
+margin-top: 10px;
+}
+.results-list {
+flex: 1;
+overflow-y: auto;
+margin: 20px 0;
+background: rgba(255, 255, 255, 0.9);
+border-radius: 20px;
+padding: 15px;
+max-height: 50vh;
+}
+.dark .results-list {
+background: rgba(60, 55, 75, 0.9);
+}
+.result-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px 15px;
+border-radius: 12px;
+margin-bottom: 8px;
+background: rgba(255, 255, 255, 0.5);
+}
+.dark .result-item {
+background: rgba(80, 75, 95, 0.5);
+}
+.result-item.correct {
+border-left: 4px solid var(--success-green);
+}
+.result-item.wrong {
+border-left: 4px solid var(--error-red);
+background: rgba(255, 107, 107, 0.15);
+}
+.result-question {
+font-size: 1.1rem;
+font-weight: 600;
+}
+.result-answers {
+text-align: right;
+}
+.user-answer {
+font-weight: 700;
+font-size: 1.1rem;
+}
+.user-answer.wrong {
+color: var(--error-red);
+text-decoration: line-through;
+}
+.correct-answer {
+color: var(--success-green);
+font-weight: 700;
+font-size: 0.95rem;
+}
+.results-buttons {
+display: flex;
+gap: 15px;
+}
+.result-btn {
+flex: 1;
+padding: 16px;
+border: none;
+border-radius: 16px;
+font-size: 1.1rem;
+font-weight: 700;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+}
+.btn-retry {
+background: linear-gradient(135deg, var(--pastel-orange), var(--pastel-pink));
+color: white;
+}
+.btn-home {
+background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+color: white;
+}
+.btn-next {
+background: linear-gradient(135deg, var(--pastel-green), var(--pastel-blue));
+color: white;
+}
+/* Victory Screen /
+.victory-screen {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(135deg, #1a1a2e, #16213e);
+z-index: 2000;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+.victory-screen.active {
+display: flex;
+}
+.trophy {
+font-size: 8rem;
+animation: trophyBounce 1s ease-in-out infinite;
+}
+@keyframes trophyBounce {
+0%, 100% { transform: translateY(0) rotate(-5deg); }
+50% { transform: translateY(-20px) rotate(5deg); }
+}
+.victory-text {
+font-size: 2rem;
+font-weight: 800;
+color: #FFD700;
+text-align: center;
+margin: 20px 0;
+text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+.victory-subtext {
+font-size: 1.3rem;
+color: #FFF;
+text-align: center;
+margin-bottom: 30px;
+}
+.stars-container {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+pointer-events: none;
+overflow: hidden;
+}
+.star {
+position: absolute;
+color: #FFD700;
+animation: twinkle 1.5s ease-in-out infinite;
+}
+@keyframes twinkle {
+0%, 100% { opacity: 0.3; transform: scale(0.8); }
+50% { opacity: 1; transform: scale(1.2); }
+}
+.victory-btn {
+padding: 16px 40px;
+background: linear-gradient(135deg, #FFD700, #FFA500);
+border: none;
+border-radius: 30px;
+font-size: 1.2rem;
+font-weight: 700;
+color: #1a1a2e;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+/* Decorative elements /
+.floating-vehicle {
+position: fixed;
+font-size: 2rem;
+opacity: 0.6;
+pointer-events: none;
+z-index: -1;
+}
+.home-screen {
+display: block;
+}
+.home-screen.hidden {
+display: none;
+}
+/* Responsive /
+@media (max-width: 380px) {
+.title { font-size: 1.8rem; }
+.question-text { font-size: 2rem; }
+.answer-display { font-size: 2rem; }
+.key { height: 55px; font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- Home Screen -->
+<div id="homeScreen" class="home-screen">
+<header class="header">
+<div class="vehicle vehicle-1">🚗</div>
+<div class="vehicle vehicle-2">🚌</div>
+<h1 class="title">乘法大挑戰</h1>
+<p class="subtitle">選擇關卡開始挑戰！</p>
+<div class="vehicle vehicle-3">🚁</div>
+<div class="vehicle vehicle-4">🚀</div>
+</header>
+<div class="level-grid">
+<!-- Beginner Level -->
+<div class="level-card beginner" onclick="showLevelDetail('beginner')">
+<div class="level-header">
+<span class="level-icon">🚗</span>
+<span class="level-title">初級</span>
+</div>
+<p class="level-desc">2至9的乘數表練習</p>
+<div class="stages-row" id="beginnerStages">
+<div class="stage-dot unlocked" data-stage="1">1</div>
+<div class="stage-dot locked" data-stage="2">2</div>
+<div class="stage-dot locked" data-stage="3">3</div>
+</div>
+</div>
+<!-- Intermediate Level -->
+<div class="level-card intermediate" onclick="showLevelDetail('intermediate')">
+<div class="level-header">
+<span class="level-icon">🚌</span>
+<span class="level-title">中級</span>
+</div>
+<p class="level-desc">多位數乘法挑戰</p>
+<div class="stages-row" id="intermediateStages">
+<div class="stage-dot unlocked" data-stage="1">1</div>
+<div class="stage-dot locked" data-stage="2">2</div>
+<div class="stage-dot locked" data-stage="3">3</div>
+</div>
+</div>
+<!-- Advanced Level -->
+<div class="level-card advanced" onclick="showLevelDetail('advanced')">
+<div class="level-header">
+<span class="level-icon">🚀</span>
+<span class="level-title">高級</span>
+</div>
+<p class="level-desc">終極乘法大師挑戰</p>
+<div class="stages-row" id="advancedStages">
+<div class="stage-dot unlocked" data-stage="1">1</div>
+<div class="stage-dot locked" data-stage="2">2</div>
+<div class="stage-dot locked" data-stage="3">3</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Game Screen -->
+<div id="gameScreen" class="game-screen">
+<div class="game-header">
+<button class="back-btn" onclick="confirmExit()">←</button>
+<div class="progress-info">
+<div class="progress-text" id="progressText">1 / 10</div>
+<div class="stage-label" id="stageLabel">初級 第1關</div>
+</div>
+<div class="timer-display" id="timerDisplay" style="visibility: hidden;">
+<span>⏱️</span>
+<span id="timerText">2:00</span>
+</div>
+</div>
+<div class="question-area">
+<div class="question-card">
+<div class="question-number" id="questionNumber">第 1 題</div>
+<div class="question-text" id="questionText">5 × 7 = </div>
+<div class="answer-display empty" id="answerDisplay"></div>
+</div>
+</div>
+<div class="keypad">
+<button class="key key-number" onclick="inputNumber('1')">1</button>
+<button class="key key-number" onclick="inputNumber('2')">2</button>
+<button class="key key-number" onclick="inputNumber('3')">3</button>
+<button class="key key-number" onclick="inputNumber('4')">4</button>
+<button class="key key-number" onclick="inputNumber('5')">5</button>
+<button class="key key-number" onclick="inputNumber('6')">6</button>
+<button class="key key-number" onclick="inputNumber('7')">7</button>
+<button class="key key-number" onclick="inputNumber('8')">8</button>
+<button class="key key-number" onclick="inputNumber('9')">9</button>
+<button class="key key-clear" onclick="clearAnswer()">C</button>
+<button class="key key-number" onclick="inputNumber('0')">0</button>
+<button class="key key-delete" onclick="deleteDigit()">⌫</button>
+<button class="key key-submit" onclick="submitAnswer()">確認 ✓</button>
+</div>
+</div>
+<!-- Results Screen -->
+<div id="resultsScreen" class="results-screen">
+<div class="results-header">
+<div class="results-icon" id="resultsIcon">🏅</div>
+<div class="results-score" id="resultsScore">8 / 10</div>
+<div class="results-message" id="resultsMessage">做得很好！繼續加油！</div>
+</div>
+<div class="results-list" id="resultsList">
+<!-- Results will be populated here -->
+</div>
+<div class="results-buttons" id="resultsButtons">
+<button class="result-btn btn-retry" onclick="retryStage()">再試一次</button>
+<button class="result-btn btn-home" onclick="goHome()">返回首頁</button>
+</div>
+</div>
+<!-- Victory Screen -->
+<div id="victoryScreen" class="victory-screen">
+<div class="stars-container" id="starsContainer"></div>
+<div class="trophy">🏆</div>
+<div class="victory-text">你勝出了！</div>
+<div class="victory-subtext">你真厲害！很叻啊！</div>
+<button class="victory-btn" onclick="closeVictory()">返回首頁</button>
+</div>
+<!-- Countdown Overlay -->
+<div id="countdownOverlay" class="countdown-overlay">
+<div class="countdown-number" id="countdownNumber">3</div>
+</div>
+</div>
+<!-- Floating decorative vehicles -->
+<div class="floating-vehicle" style="top: 15%; left: 5%;">🚗</div>
+<div class="floating-vehicle" style="top: 40%; right: 5%;">✈️</div>
+<div class="floating-vehicle" style="bottom: 20%; left: 8%;">🚢</div>
+<div class="floating-vehicle" style="bottom: 35%; right: 8%;">🚁</div>
+<script>
+// Dark mode detection
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+document.documentElement.classList.add('dark');
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+if (event.matches) {
+document.documentElement.classList.add('dark');
+} else {
+document.documentElement.classList.remove('dark');
+}
+});
+// Game State
+const gameState = {
+currentLevel: null,
+currentStage: null,
+questions: [],
+currentQuestionIndex: 0,
+userAnswers: [],
+currentAnswer: '',
+timer: null,
+timeRemaining: 0,
+isTimedStage: false,
+progress: {
+beginner: { stage1: false, stage2: false, stage3: false },
+intermediate: { stage1: false, stage2: false, stage3: false },
+advanced: { stage1: false, stage2: false, stage3: false }
+}
+};
+// Level configurations
+const levelConfig = {
+beginner: {
+name: '初級',
+icon: '🚗',
+stages: {
+1: { questions: 10, timed: false, desc: '2至9乘數表' },
+2: { questions: 20, timed: false, desc: '2至9乘數表' },
+3: { questions: 15, timed: true, time: 120, desc: '2至9乘數表（限時）' }
+}
+},
+intermediate: {
+name: '中級',
+icon: '🚌',
+stages: {
+1: { questions: 15, timed: false, desc: '2位數×個位數' },
+2: { questions: 15, timed: false, desc: '3位數×個位數' },
+3: { questions: 10, timed: true, time: 210, desc: '混合題目（限時）' }
+}
+},
+advanced: {
+name: '高級',
+icon: '🚀',
+stages: {
+1: { questions: 15, timed: false, desc: '2位數×2位數' },
+2: { questions: 15, timed: false, desc: '3位數×2位數' },
+3: { questions: 12, timed: true, time: 240, desc: '混合題目（限時）' }
+}
+}
+};
+// Encouragement messages
+const encouragements = {
+perfect: ['太棒了！完美過關！🌟', '你是乘法天才！✨', '滿分！超級厲害！🎉', '完美！你真的很強！💪'],
+good: ['做得很好！繼續加油！😊', '很棒的表現！💫', '加油！你越來越強了！🌈', '不錯哦！繼續努力！👍'],
+tryAgain: ['別灰心，再試一次！💪', '加油！你可以的！🌟', '繼續練習，一定能成功！😊', '失敗是成功之母，再來！💫']
+};
+// Generate questions based on level and stage
+function generateQuestions(level, stage) {
+const questions = [];
+const config = levelConfig[level].stages[stage];
+const count = config.questions;
+if (level === 'beginner') {
+// 2至9的乘數表
+const usedQuestions = new Set();
+while (questions.length < count) {
+const a = Math.floor(Math.random() * 8) + 2; // 2-9
+const b = Math.floor(Math.random() * 9) + 1; // 1-9
+const key = `${a}x${b}`;
+if (!usedQuestions.has(key)) {
+usedQuestions.add(key);
+questions.push({ a, b, answer: a * b });
+}
+}
+} else if (level === 'intermediate') {
+if (stage === 1) {
+// 2位數乘個位數
+while (questions.length < count) {
+const a = Math.floor(Math.random() * 90) + 10; // 10-99
+const b = Math.floor(Math.random() * 8) + 2; // 2-9
+questions.push({ a, b, answer: a * b });
+}
+} else if (stage === 2) {
+// 3位數乘個位數
+while (questions.length < count) {
+const a = Math.floor(Math.random() * 900) + 100; // 100-999
+const b = Math.floor(Math.random() * 8) + 2; // 2-9
+questions.push({ a, b, answer: a * b });
+}
+} else {
+// 混合2位數和3位數乘個位數
+while (questions.length < count) {
+const is2digit = Math.random() < 0.5;
+const a = is2digit
+? Math.floor(Math.random() * 90) + 10
+: Math.floor(Math.random() * 900) + 100;
+const b = Math.floor(Math.random() * 8) + 2;
+questions.push({ a, b, answer: a * b });
+}
+}
+} else if (level === 'advanced') {
+if (stage === 1) {
+// 2位數乘2位數
+while (questions.length < count) {
+const a = Math.floor(Math.random() * 90) + 10;
+const b = Math.floor(Math.random() * 90) + 10;
+questions.push({ a, b, answer: a * b });
+}
+} else if (stage === 2) {
+// 3位數乘2位數
+while (questions.length < count) {
+const a = Math.floor(Math.random() * 900) + 100;
+const b = Math.floor(Math.random() * 90) + 10;
+questions.push({ a, b, answer: a * b });
+}
+} else {
+// 混合2位數乘2位數和3位數乘2位數
+while (questions.length < count) {
+const is2digit = Math.random() < 0.5;
+const a = is2digit
+? Math.floor(Math.random() * 90) + 10
+: Math.floor(Math.random() * 900) + 100;
+const b = Math.floor(Math.random() * 90) + 10;
+questions.push({ a, b, answer: a * b });
+}
+}
+}
+return questions;
+}
+// Update stage indicators on home screen
+function updateStageIndicators() {
+['beginner', 'intermediate', 'advanced'].forEach(level => {
+const container = document.getElementById(`${level}Stages`);
+const dots = container.querySelectorAll('.stage-dot');
+dots.forEach((dot, index) => {
+const stageNum = index + 1;
+const isCompleted = gameState.progress[level][`stage${stageNum}`];
+const prevCompleted = stageNum === 1 || gameState.progress[level][`stage${stageNum - 1}`];
+dot.className = 'stage-dot';
+if (isCompleted) {
+dot.classList.add('completed');
+} else if (prevCompleted) {
+dot.classList.add('unlocked');
+} else {
+dot.classList.add('locked');
+}
+});
+});
+}
+// Show level detail and start stage selection
+function showLevelDetail(level) {
+const stages = document.getElementById(`${level}Stages`);
+const dots = stages.querySelectorAll('.stage-dot');
+dots.forEach((dot, index) => {
+const stageNum = index + 1;
+const isUnlocked = dot.classList.contains('unlocked') || dot.classList.contains('completed');
+if (isUnlocked) {
+dot.onclick = (e) => {
+e.stopPropagation();
+startGame(level, stageNum);
+};
+}
+});
+}
+// Start game with countdown
+function startGame(level, stage) {
+gameState.currentLevel = level;
+gameState.currentStage = stage;
+gameState.questions = generateQuestions(level, stage);
+gameState.currentQuestionIndex = 0;
+gameState.userAnswers = [];
+gameState.currentAnswer = '';
+const config = levelConfig[level].stages[stage];
+gameState.isTimedStage = config.timed;
+gameState.timeRemaining = config.time || 0;
+// Hide home, show game screen
+document.getElementById('homeScreen').classList.add('hidden');
+document.getElementById('gameScreen').classList.add('active');
+document.getElementById('resultsScreen').classList.remove('active');
+// Update UI
+updateGameUI();
+// Show countdown
+showCountdown();
+}
+// Show 3-2-1 countdown
+function showCountdown() {
+const overlay = document.getElementById('countdownOverlay');
+const numberEl = document.getElementById('countdownNumber');
+overlay.classList.add('active');
+let count = 3;
+numberEl.textContent = count;
+numberEl.style.animation = 'none';
+numberEl.offsetHeight; // Trigger reflow
+numberEl.style.animation = 'countdownPop 0.8s ease-out';
+const interval = setInterval(() => {
+count--;
+if (count > 0) {
+numberEl.textContent = count;
+numberEl.style.animation = 'none';
+numberEl.offsetHeight;
+numberEl.style.animation = 'countdownPop 0.8s ease-out';
+} else {
+numberEl.textContent = '開始！';
+numberEl.style.animation = 'none';
+numberEl.offsetHeight;
+numberEl.style.animation = 'countdownPop 0.8s ease-out';
+setTimeout(() => {
+overlay.classList.remove('active');
+if (gameState.isTimedStage) {
+startTimer();
+}
+}, 600);
+clearInterval(interval);
+}
+}, 800);
+}
+// Start timer for timed stages
+function startTimer() {
+const timerDisplay = document.getElementById('timerDisplay');
+timerDisplay.style.visibility = 'visible';
+updateTimerDisplay();
+gameState.timer = setInterval(() => {
+gameState.timeRemaining--;
+updateTimerDisplay();
+if (gameState.timeRemaining <= 10) {
+timerDisplay.classList.add('warning');
+}
+if (gameState.timeRemaining <= 0) {
+clearInterval(gameState.timer);
+// Auto-submit remaining questions as wrong
+while (gameState.currentQuestionIndex < gameState.questions.length) {
+gameState.userAnswers.push({
+question: gameState.questions[gameState.currentQuestionIndex],
+userAnswer: null,
+correct: false
+});
+gameState.currentQuestionIndex++;
+}
+showResults();
+}
+}, 1000);
+}
+// Update timer display
+function updateTimerDisplay() {
+const minutes = Math.floor(gameState.timeRemaining / 60);
+const seconds = gameState.timeRemaining % 60;
+document.getElementById('timerText').textContent =
+`${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+// Update game UI
+function updateGameUI() {
+const config = levelConfig[gameState.currentLevel];
+const stageConfig = config.stages[gameState.currentStage];
+const question = gameState.questions[gameState.currentQuestionIndex];
+document.getElementById('progressText').textContent =
+`${gameState.currentQuestionIndex + 1} / ${stageConfig.questions}`;
+document.getElementById('stageLabel').textContent =
+`${config.name} 第${gameState.currentStage}關`;
+document.getElementById('questionNumber').textContent =
+`第 ${gameState.currentQuestionIndex + 1} 題`;
+document.getElementById('questionText').textContent =
+`${question.a} × ${question.b} = `;
+const answerDisplay = document.getElementById('answerDisplay');
+answerDisplay.textContent = gameState.currentAnswer;
+answerDisplay.classList.toggle('empty', gameState.currentAnswer === '');
+// Show/hide timer
+const timerDisplay = document.getElementById('timerDisplay');
+if (gameState.isTimedStage) {
+timerDisplay.style.visibility = 'visible';
+} else {
+timerDisplay.style.visibility = 'hidden';
+}
+timerDisplay.classList.remove('warning');
+}
+// Input number
+function inputNumber(num) {
+if (gameState.currentAnswer.length < 8) {
+gameState.currentAnswer += num;
+updateAnswerDisplay();
+}
+}
+// Clear answer
+function clearAnswer() {
+gameState.currentAnswer = '';
+updateAnswerDisplay();
+}
+// Delete last digit
+function deleteDigit() {
+gameState.currentAnswer = gameState.currentAnswer.slice(0, -1);
+updateAnswerDisplay();
+}
+// Update answer display
+function updateAnswerDisplay() {
+const answerDisplay = document.getElementById('answerDisplay');
+answerDisplay.textContent = gameState.currentAnswer;
+answerDisplay.classList.toggle('empty', gameState.currentAnswer === '');
+}
+// Submit answer
+function submitAnswer() {
+if (gameState.currentAnswer === '') return;
+const question = gameState.questions[gameState.currentQuestionIndex];
+const userAnswer = parseInt(gameState.currentAnswer);
+const isCorrect = userAnswer === question.answer;
+gameState.userAnswers.push({
+question,
+userAnswer,
+correct: isCorrect
+});
+gameState.currentQuestionIndex++;
+gameState.currentAnswer = '';
+if (gameState.currentQuestionIndex >= gameState.questions.length) {
+if (gameState.timer) {
+clearInterval(gameState.timer);
+}
+showResults();
+} else {
+updateGameUI();
+}
+}
+// Show results
+function showResults() {
+document.getElementById('gameScreen').classList.remove('active');
+document.getElementById('resultsScreen').classList.add('active');
+const correctCount = gameState.userAnswers.filter(a => a.correct).length;
+const totalCount = gameState.questions.length;
+const percentage = correctCount / totalCount;
+const allCorrect = correctCount === totalCount;
+const passed80 = percentage >= 0.8; // 80% threshold for unlocking next stage
+// Update score display
+document.getElementById('resultsScore').textContent = `${correctCount} / ${totalCount}`;
+// Set icon and message
+let icon, message;
+let canUnlockNext = false;
+if (allCorrect) {
+icon = '🏆';
+message = encouragements.perfect[Math.floor(Math.random() * encouragements.perfect.length)];
+canUnlockNext = true;
+} else if (passed80) {
+icon = '🏅';
+message = '答對80%以上！成功解鎖下一關！🎉';
+canUnlockNext = true;
+} else if (percentage >= 0.6) {
+icon = '⭐';
+message = encouragements.good[Math.floor(Math.random() * encouragements.good.length)];
+} else {
+icon = '💪';
+message = encouragements.tryAgain[Math.floor(Math.random() * encouragements.tryAgain.length)];
+}
+// Update progress if passed (80% or above)
+if (canUnlockNext) {
+gameState.progress[gameState.currentLevel][`stage${gameState.currentStage}`] = true;
+updateStageIndicators();
+// Check for ultimate victory (Advanced Stage 3 with all correct)
+if (gameState.currentLevel === 'advanced' && gameState.currentStage === 3 && allCorrect) {
+setTimeout(() => showVictory(), 500);
+return;
+}
+}
+document.getElementById('resultsIcon').textContent = icon;
+document.getElementById('resultsMessage').textContent = message;
+// Populate results list
+const resultsList = document.getElementById('resultsList');
+resultsList.innerHTML = '';
+gameState.userAnswers.forEach((result, index) => {
+const item = document.createElement('div');
+item.className = `result-item ${result.correct ? 'correct' : 'wrong'}`;
+const questionStr = `${result.question.a} × ${result.question.b}`;
+const userAnswerStr = result.userAnswer !== null ? result.userAnswer : '未作答';
+item.innerHTML = `
+<div class="result-question">${index + 1}. ${questionStr} = </div>
+<div class="result-answers">
+<div class="user-answer ${result.correct ? '' : 'wrong'}">${userAnswerStr}</div>
+${!result.correct ? `<div class="correct-answer">正確: ${result.question.answer}</div>` : ''}
+</div>
+`;
+resultsList.appendChild(item);
+});
+// Update buttons
+const buttonsContainer = document.getElementById('resultsButtons');
+buttonsContainer.innerHTML = '';
+// Always show retry button
+const retryBtn = document.createElement('button');
+retryBtn.className = 'result-btn btn-retry';
+retryBtn.textContent = '再試一次';
+retryBtn.onclick = retryStage;
+buttonsContainer.appendChild(retryBtn);
+// Show next button if passed 80% and not on stage 3
+if (canUnlockNext && gameState.currentStage < 3) {
+const nextBtn = document.createElement('button');
+nextBtn.className = 'result-btn btn-next';
+nextBtn.textContent = '下一關';
+nextBtn.onclick = () => startGame(gameState.currentLevel, gameState.currentStage + 1);
+buttonsContainer.appendChild(nextBtn);
+}
+const homeBtn = document.createElement('button');
+homeBtn.className = 'result-btn btn-home';
+homeBtn.textContent = '返回首頁';
+homeBtn.onclick = goHome;
+buttonsContainer.appendChild(homeBtn);
+}
+// Show victory screen
+function showVictory() {
+const victoryScreen = document.getElementById('victoryScreen');
+victoryScreen.classList.add('active');
+// Create stars
+const starsContainer = document.getElementById('starsContainer');
+starsContainer.innerHTML = '';
+for (let i = 0; i < 30; i++) {
+const star = document.createElement('div');
+star.className = 'star';
+star.textContent = '⭐';
+star.style.left = Math.random() * 100 + '%';
+star.style.top = Math.random() * 100 + '%';
+star.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+star.style.animationDelay = Math.random() * 2 + 's';
+starsContainer.appendChild(star);
+}
+}
+// Close victory screen
+function closeVictory() {
+document.getElementById('victoryScreen').classList.remove('active');
+goHome();
+}
+// Retry current stage
+function retryStage() {
+startGame(gameState.currentLevel, gameState.currentStage);
+}
+// Go back to home
+function goHome() {
+if (gameState.timer) {
+clearInterval(gameState.timer);
+}
+document.getElementById('gameScreen').classList.remove('active');
+document.getElementById('resultsScreen').classList.remove('active');
+document.getElementById('homeScreen').classList.remove('hidden');
+updateStageIndicators();
+}
+// Confirm exit during game
+function confirmExit() {
+// Create custom modal instead of using confirm()
+const modal = document.createElement('div');
+modal.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0,0,0,0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 3000;
+`;
+modal.innerHTML = `
+<div style="
+background: var(--pastel-cream);
+padding: 30px;
+border-radius: 24px;
+text-align: center;
+max-width: 300px;
+margin: 20px;
+box-shadow: var(--soft-shadow);
+">
+<div style="font-size: 3rem; margin-bottom: 15px;">🚗</div>
+<p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-dark);">
+確定要離開遊戲嗎？<br>目前的進度將不會保存。
+</p>
+<div style="display: flex; gap: 10px; justify-content: center;">
+<button onclick="this.closest('div[style=fixed]').remove()" style="
+padding: 12px 24px;
+border: none;
+border-radius: 12px;
+background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+color: white;
+font-weight: 700;
+font-size: 1rem;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+">繼續遊戲</button>
+<button onclick="this.closest('div[style=fixed]').remove(); goHome();" style="
+padding: 12px 24px;
+border: none;
+border-radius: 12px;
+background: linear-gradient(135deg, var(--pastel-orange), var(--pastel-pink));
+color: white;
+font-weight: 700;
+font-size: 1rem;
+cursor: pointer;
+font-family: 'Nunito', sans-serif;
+">離開</button>
+</div>
+</div>
+`;
+document.body.appendChild(modal);
+}
+// Initialize
+updateStageIndicators();
+</script>
+</body>
+</html>
